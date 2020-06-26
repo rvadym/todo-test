@@ -1,0 +1,11 @@
+.idea
+*.DS_Store
+vendor
+bin
+phpunit.xml
+.phpunit.result.cache
+coverage
+var/*
+node_modules
+*.log
+*.AppleDouble

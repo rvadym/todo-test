@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+
+  todotest_back:
+    container_name: todotest_back
+    build:
+      context: .
+      dockerfile: docker/Api.Dockerfile
+      #target: develop
+    ports:
+      - "18087:8888"
+    volumes:
+      - $PWD:/app
+      - ./docker/php/php-ini-overrides.ini:/etc/php7/conf.d/99-overrides.ini
+    working_dir: /app
+    command: ["tail", "-f", "/dev/null"]
+    # command: ["php", "-S", "0.0.0.0:8888", "-t", "public", "public/index.php"]
+
+  todotest_db:
+    container_name: todotest_db
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: todotest
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - $PWD/var/mysql:/var/lib/mysql

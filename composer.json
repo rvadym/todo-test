@@ -1,0 +1,56 @@
+{
+  "name": "rvadym/todotest",
+  "description": "ToDoTest",
+  "license": "Private",
+  "type": "project",
+  "repositories":[
+    {
+      "type": "vcs",
+      "url": "git@github.com:rvadym/types.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:rvadym/paginator.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:rvadym/criteria-builder.git"
+    }
+  ],
+  "require": {
+    "php": "^7.3",
+    "ext-json": "*",
+    "myclabs/php-enum": "@stable",
+    "rvadym/types": "@stable",
+    "rvadym/paginator": "@stable",
+    "rvadym/criteria-builder": "@stable",
+    "ramsey/uuid": "@stable",
+    "slim/slim": "^3.0",
+    "doctrine/migrations": "~2.2",
+    "doctrine/data-fixtures": "@stable",
+    "doctrine/orm": "^2"
+  },
+  "require-dev": {
+    "phan/phan": "@stable",
+    "mockery/mockery": "@stable",
+    "phpunit/php-code-coverage": "^7.0",
+    "phpunit/phpunit": "^8"
+  },
+  "autoload": {
+    "psr-4": {
+      "ToDoTest\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\ToDoTest\\": "tests/"
+    }
+  },
+  "scripts": {},
+  "config": {
+    "preferred-install": "source",
+    "bin-dir": "bin"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
