@@ -11,6 +11,7 @@ use Rvadym\Paginator\Model\PageQuery;
 use ToDoTest\Adapters\Doctrine\AbstractRepository;
 use ToDoTest\Adapters\Doctrine\Factory\TaskFactory;
 use ToDoTest\Application\Collection\TaskCollection;
+use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Read\GetTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
@@ -22,7 +23,8 @@ use ToDoTest\Adapters\Doctrine\Entity\Task as TaskEntity;
 class TaskDoctrineRepository extends AbstractRepository implements
     GetTaskRepositoryInterface,
     CreateTaskRepositoryInterface,
-    UpdateTaskRepositoryInterface
+    UpdateTaskRepositoryInterface,
+    GetPaginatedTasksRepositoryInterface
 {
     use CriteriaBuilderTrait;
     use CountTrait;

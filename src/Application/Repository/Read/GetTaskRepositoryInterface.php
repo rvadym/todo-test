@@ -8,8 +8,5 @@ use ToDoTest\Domain\ValueObject\TaskId;
 
 interface GetTaskRepositoryInterface
 {
-    /**
-     * @throws TaskNotFoundException
-     */
     public function getOne(TaskId $taskId): ?Task;
 }
