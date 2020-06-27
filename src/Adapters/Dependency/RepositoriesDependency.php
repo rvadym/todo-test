@@ -5,6 +5,7 @@ namespace ToDoTest\Adapters\Dependency;
 use Doctrine\ORM\EntityManager;
 use Slim\Container;
 use ToDoTest\Adapters\Repository\TaskDoctrineRepository;
+use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Read\GetTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
@@ -36,6 +37,10 @@ class RepositoriesDependency extends AbstractDependency
         // interfaces
 
         $this->bind(GetTaskRepositoryInterface::class, function (Container $container): GetTaskRepositoryInterface
+        {
+            return $container->get(TaskDoctrineRepository::class);
+        });
+        $this->bind(GetPaginatedTasksRepositoryInterface::class, function (Container $container): GetPaginatedTasksRepositoryInterface
         {
             return $container->get(TaskDoctrineRepository::class);
         });

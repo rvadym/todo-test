@@ -5,9 +5,11 @@ namespace ToDoTest\Adapters\Dependency;
 use Slim\Container;
 use ToDoTest\Application\Func\GenerateUuidFunc;
 use ToDoTest\Application\Func\GetTaskFunc;
+use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
 use ToDoTest\Application\UseCase\CreateTaskUseCase;
+use ToDoTest\Application\UseCase\GetPaginatedTasksUseCase;
 use ToDoTest\Application\UseCase\GetTaskUseCase;
 use ToDoTest\Application\UseCase\UpdateTaskDescriptionUseCase;
 
@@ -37,6 +39,12 @@ class UseCasesDependency extends AbstractDependency
         {
             return new GetTaskUseCase(
                 $container->get(GetTaskFunc::class),
+            );
+        });
+        $this->bind(GetPaginatedTasksUseCase::class, function(Container $container): GetPaginatedTasksUseCase
+        {
+            return new GetPaginatedTasksUseCase(
+                $container->get(GetPaginatedTasksRepositoryInterface::class),
             );
         });
         $this->bind(UpdateTaskDescriptionUseCase::class, function(Container $container): UpdateTaskDescriptionUseCase

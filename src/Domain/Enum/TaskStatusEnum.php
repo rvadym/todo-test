@@ -12,6 +12,6 @@ use MyCLabs\Enum\Enum;
 class TaskStatusEnum extends Enum
 {
     private const NO_STATUS = '';
-    private const ACTIVE = 'NEW';
+    private const ACTIVE = 'ACTIVE';
     private const DONE = 'DONE';
 }

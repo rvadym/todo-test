@@ -23,6 +23,12 @@ class GetTaskFunc
      */
     public function execute(TaskId $taskId): Task
     {
-        return $this->getTaskRepository->getOne($taskId);
+        $task = $this->getTaskRepository->getOne($taskId);
+
+        if (! $task instanceof Task) {
+            throw new TaskNotFoundException();
+        }
+
+        return $task;
     }
 }
