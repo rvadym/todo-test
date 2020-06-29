@@ -11,7 +11,7 @@ use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
 use ToDoTest\Application\UseCase\CreateTaskUseCase;
 use ToDoTest\Application\UseCase\GetPaginatedTasksUseCase;
 use ToDoTest\Application\UseCase\GetTaskUseCase;
-use ToDoTest\Application\UseCase\UpdateTaskDescriptionUseCase;
+use ToDoTest\Application\UseCase\UpdateTaskUseCase;
 
 class UseCasesDependency extends AbstractDependency
 {
@@ -47,9 +47,9 @@ class UseCasesDependency extends AbstractDependency
                 $container->get(GetPaginatedTasksRepositoryInterface::class),
             );
         });
-        $this->bind(UpdateTaskDescriptionUseCase::class, function(Container $container): UpdateTaskDescriptionUseCase
+        $this->bind(UpdateTaskUseCase::class, function(Container $container): UpdateTaskUseCase
         {
-            return new UpdateTaskDescriptionUseCase(
+            return new UpdateTaskUseCase(
                 $container->get(GetTaskFunc::class),
                 $container->get(UpdateTaskRepositoryInterface::class),
             );

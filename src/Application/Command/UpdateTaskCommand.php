@@ -2,21 +2,32 @@
 
 namespace ToDoTest\Application\Command;
 
-use ToDoTest\Domain\Model\Task;
+use ToDoTest\Domain\ValueObject\TaskDescription;
+use ToDoTest\Domain\ValueObject\TaskId;
 
 class UpdateTaskCommand
 {
-    /** @var Task */
-    private $task;
+    /** @var TaskId */
+    private $taskId;
+
+    /** @var TaskDescription */
+    private $taskDescription;
 
     public function __construct(
-        Task $task
+        TaskId $taskId,
+        TaskDescription $taskDescription
     ) {
-        $this->task = $task;
+        $this->taskId = $taskId;
+        $this->taskDescription = $taskDescription;
     }
 
-    public function getTask(): Task
+    public function getTaskId(): TaskId
     {
-        return $this->task;
+        return $this->taskId;
+    }
+
+    public function getTaskDescription(): TaskDescription
+    {
+        return $this->taskDescription;
     }
 }

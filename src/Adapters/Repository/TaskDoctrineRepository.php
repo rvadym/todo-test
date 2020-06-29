@@ -77,10 +77,9 @@ class TaskDoctrineRepository extends AbstractRepository implements
         $taskEntity->setStatus($task->getTaskStatus()->getValue()->getValue());
         $taskEntity->setDescription($task->getTaskDescription()->getValue());
 
-        /** @var TaskEntity $mergedTaskEntity */
-        $mergedTaskEntity = $this->getEm()->merge($taskEntity);
+        $this->getEm()->persist($taskEntity);
 
-        return TaskFactory::createFromEntity($mergedTaskEntity);
+        return TaskFactory::createFromEntity($taskEntity);
     }
 
     /**
