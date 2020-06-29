@@ -51,5 +51,4 @@ class GetTaskAction
     {
         return self::INDEX_ID;
     }
-
 }
