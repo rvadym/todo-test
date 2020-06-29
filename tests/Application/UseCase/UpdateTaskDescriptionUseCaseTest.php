@@ -4,19 +4,19 @@ namespace Test\ToDoTest\Application\UseCase;
 
 use PHPUnit\Framework\TestCase;
 use Mockery as M;
-use ToDoTest\Application\Command\UpdateTaskDescriptionCommand;
+use ToDoTest\Application\Command\UpdateTaskCommand;
 use ToDoTest\Application\Exception\TaskNotFoundException;
 use ToDoTest\Application\Exception\TaskNotUpdatedException;
 use ToDoTest\Application\Func\GetTaskFunc;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
-use ToDoTest\Application\UseCase\UpdateTaskDescriptionUseCase;
+use ToDoTest\Application\UseCase\UpdateTaskUseCase;
 use ToDoTest\Domain\Enum\TaskStatusEnum;
 use ToDoTest\Domain\Model\Task;
 use ToDoTest\Domain\ValueObject\TaskDescription;
 use ToDoTest\Domain\ValueObject\TaskId;
 use ToDoTest\Domain\ValueObject\TaskStatus;
 
-class UpdateTaskDescriptionUseCaseTest extends TestCase
+class UpdateTaskUseCaseTest extends TestCase
 {
     public function testExecuteSuccess(): void
     {
@@ -36,11 +36,11 @@ class UpdateTaskDescriptionUseCaseTest extends TestCase
         $updateTaskRepositoryMock = M::mock(UpdateTaskRepositoryInterface::class);
         $updateTaskRepositoryMock->expects('update')->once();
 
-        $command = new UpdateTaskDescriptionCommand(
+        $command = new UpdateTaskCommand(
             $currentTaskId,
             $updatedTaskDescription
         );
-        $useCase = new UpdateTaskDescriptionUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
+        $useCase = new UpdateTaskUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
 
         $aggregate = $useCase->execute($command);
 
@@ -66,11 +66,11 @@ class UpdateTaskDescriptionUseCaseTest extends TestCase
         $updateTaskRepositoryMock = M::mock(UpdateTaskRepositoryInterface::class);
         $updateTaskRepositoryMock->expects('update')->never();
 
-        $command = new UpdateTaskDescriptionCommand(
+        $command = new UpdateTaskCommand(
             $currentTaskId,
             $updatedTaskDescription
         );
-        $useCase = new UpdateTaskDescriptionUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
+        $useCase = new UpdateTaskUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
 
         $useCase->execute($command);
     }
@@ -97,11 +97,11 @@ class UpdateTaskDescriptionUseCaseTest extends TestCase
             new TaskNotUpdatedException()
         );
 
-        $command = new UpdateTaskDescriptionCommand(
+        $command = new UpdateTaskCommand(
             $currentTaskId,
             $updatedTaskDescription
         );
-        $useCase = new UpdateTaskDescriptionUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
+        $useCase = new UpdateTaskUseCase($getTaskFuncMock, $updateTaskRepositoryMock);
 
         $useCase->execute($command);
     }

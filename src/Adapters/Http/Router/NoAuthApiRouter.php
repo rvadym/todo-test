@@ -8,6 +8,7 @@ use ToDoTest\Adapters\Http\Action\Api\ApiRootAction;
 use ToDoTest\Adapters\Http\Action\Api\CreateTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\GetPaginatedTasksAction;
 use ToDoTest\Adapters\Http\Action\Api\GetTaskAction;
+use ToDoTest\Adapters\Http\Action\Api\ToggleTaskStatusAction;
 use ToDoTest\Adapters\Http\Action\Api\UpdateTaskAction;
 
 class NoAuthApiRouter extends AbstractRouter
@@ -34,6 +35,11 @@ class NoAuthApiRouter extends AbstractRouter
         $this->getApp()->put('/tasks/{id}',  function(Request $request, Response $response, array $args): Response
         {
             return $this->get(UpdateTaskAction::class)->execute($request, $response, $args);
+        });
+
+        $this->getApp()->patch('/tasks/{id}/toggle-status',  function(Request $request, Response $response, array $args): Response
+        {
+            return $this->get(ToggleTaskStatusAction::class)->execute($request, $response, $args);
         });
 
         $this->getApp()->post('/tasks',  function(Request $request, Response $response, array $args): Response
