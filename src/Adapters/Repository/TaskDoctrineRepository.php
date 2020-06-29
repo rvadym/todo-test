@@ -14,6 +14,7 @@ use ToDoTest\Application\Collection\TaskCollection;
 use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Read\GetTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
+use ToDoTest\Application\Repository\Write\DeleteTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
 use ToDoTest\Domain\Model\Task;
 use ToDoTest\Domain\ValueObject\TaskId;
@@ -24,7 +25,8 @@ class TaskDoctrineRepository extends AbstractRepository implements
     GetTaskRepositoryInterface,
     CreateTaskRepositoryInterface,
     UpdateTaskRepositoryInterface,
-    GetPaginatedTasksRepositoryInterface
+    GetPaginatedTasksRepositoryInterface,
+    DeleteTaskRepositoryInterface
 {
     use CriteriaBuilderTrait;
     use CountTrait;
@@ -42,6 +44,25 @@ class TaskDoctrineRepository extends AbstractRepository implements
         $taskEntity->setStatus($task->getTaskStatus()->getValue()->getValue());
         $taskEntity->setDescription($task->getTaskDescription()->getValue());
         $taskEntity->setIsDeleted(false);
+
+        $this->getEm()->persist($taskEntity);
+    }
+
+    /**
+     * @throws ORMException
+     */
+    public function delete(TaskId $taskId): void
+    {
+        $taskEntity = $this->getBy([
+            'id' => $taskId->getValue(),
+            'isDeleted' => false,
+        ]);
+
+        if (is_null($taskEntity)) {
+            return;
+        }
+
+        $taskEntity->setIsDeleted(true);
 
         $this->getEm()->persist($taskEntity);
     }
