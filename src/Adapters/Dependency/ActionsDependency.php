@@ -6,10 +6,12 @@ use Slim\Container;
 use ToDoTest\Adapters\Http\Action\Api\CreateTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\GetPaginatedTasksAction;
 use ToDoTest\Adapters\Http\Action\Api\GetTaskAction;
+use ToDoTest\Adapters\Http\Action\Api\ToggleTaskStatusAction;
 use ToDoTest\Adapters\Http\Action\Api\UpdateTaskAction;
 use ToDoTest\Application\UseCase\CreateTaskUseCase;
 use ToDoTest\Application\UseCase\GetPaginatedTasksUseCase;
 use ToDoTest\Application\UseCase\GetTaskUseCase;
+use ToDoTest\Application\UseCase\ToggleTaskStatusUseCase;
 use ToDoTest\Application\UseCase\UpdateTaskUseCase;
 
 class ActionsDependency extends AbstractDependency
@@ -49,6 +51,12 @@ class ActionsDependency extends AbstractDependency
         {
             return new UpdateTaskAction(
                 $container->get(UpdateTaskUseCase::class)
+            );
+        });
+        $this->bind(ToggleTaskStatusAction::class, function (Container $container): ToggleTaskStatusAction
+        {
+            return new ToggleTaskStatusAction(
+                $container->get(ToggleTaskStatusUseCase::class)
             );
         });
     }

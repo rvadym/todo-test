@@ -63,7 +63,7 @@ class TaskDoctrineRepository extends AbstractRepository implements
     /**
      * @throws ORMException
      */
-    public function update(Task $task): ?Task
+    public function update(Task $task): void
     {
         $taskEntity = $this->getBy([
             'id' => $task->getTaskId()->getValue(),
@@ -71,15 +71,13 @@ class TaskDoctrineRepository extends AbstractRepository implements
         ]);
 
         if (is_null($taskEntity)) {
-            return null;
+            return;
         }
 
         $taskEntity->setStatus($task->getTaskStatus()->getValue()->getValue());
         $taskEntity->setDescription($task->getTaskDescription()->getValue());
 
         $this->getEm()->persist($taskEntity);
-
-        return TaskFactory::createFromEntity($taskEntity);
     }
 
     /**

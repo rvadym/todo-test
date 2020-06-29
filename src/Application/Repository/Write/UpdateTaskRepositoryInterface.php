@@ -10,5 +10,5 @@ interface UpdateTaskRepositoryInterface
     /**
      * @throws TaskNotUpdatedException
      */
-    public function update(Task $task): ?Task;
+    public function update(Task $task): void;
 }

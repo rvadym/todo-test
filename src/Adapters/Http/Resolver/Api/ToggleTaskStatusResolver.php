@@ -6,7 +6,7 @@ use ToDoTest\Adapters\Http\Exception\JsonEncodeErrorException;
 use ToDoTest\Application\Aggregate\TaskAggregate;
 use ToDoTest\Domain\Model\Task;
 
-class GetTaskResolver extends AbstractJsonResolver
+class ToggleTaskStatusResolver extends AbstractJsonResolver
 {
     /** @var TaskAggregate */
     private $taskAggregate;
