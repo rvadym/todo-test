@@ -7,12 +7,14 @@ use ToDoTest\Application\Func\GenerateUuidFunc;
 use ToDoTest\Application\Func\GetTaskFunc;
 use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
+use ToDoTest\Application\Repository\Write\DeleteTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
 use ToDoTest\Application\UseCase\CreateTaskUseCase;
 use ToDoTest\Application\UseCase\GetPaginatedTasksUseCase;
 use ToDoTest\Application\UseCase\GetTaskUseCase;
 use ToDoTest\Application\UseCase\ToggleTaskStatusUseCase;
 use ToDoTest\Application\UseCase\UpdateTaskUseCase;
+use ToDoTest\Application\UseCase\DeleteTaskUseCase;
 
 class UseCasesDependency extends AbstractDependency
 {
@@ -60,6 +62,12 @@ class UseCasesDependency extends AbstractDependency
             return new ToggleTaskStatusUseCase(
                 $container->get(GetTaskFunc::class),
                 $container->get(UpdateTaskRepositoryInterface::class),
+            );
+        });
+        $this->bind(DeleteTaskUseCase::class, function(Container $container): DeleteTaskUseCase
+        {
+            return new DeleteTaskUseCase(
+                $container->get(DeleteTaskRepositoryInterface::class),
             );
         });
     }

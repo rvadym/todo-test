@@ -8,6 +8,7 @@ use ToDoTest\Adapters\Repository\TaskDoctrineRepository;
 use ToDoTest\Application\Repository\Read\GetPaginatedTasksRepositoryInterface;
 use ToDoTest\Application\Repository\Read\GetTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\CreateTaskRepositoryInterface;
+use ToDoTest\Application\Repository\Write\DeleteTaskRepositoryInterface;
 use ToDoTest\Application\Repository\Write\UpdateTaskRepositoryInterface;
 
 class RepositoriesDependency extends AbstractDependency
@@ -49,6 +50,10 @@ class RepositoriesDependency extends AbstractDependency
             return $container->get(TaskDoctrineRepository::class);
         });
         $this->bind(UpdateTaskRepositoryInterface::class, function (Container $container): UpdateTaskRepositoryInterface
+        {
+            return $container->get(TaskDoctrineRepository::class);
+        });
+        $this->bind(DeleteTaskRepositoryInterface::class, function (Container $container): DeleteTaskRepositoryInterface
         {
             return $container->get(TaskDoctrineRepository::class);
         });

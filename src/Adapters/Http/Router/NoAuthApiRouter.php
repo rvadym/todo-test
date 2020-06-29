@@ -10,6 +10,7 @@ use ToDoTest\Adapters\Http\Action\Api\GetPaginatedTasksAction;
 use ToDoTest\Adapters\Http\Action\Api\GetTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\ToggleTaskStatusAction;
 use ToDoTest\Adapters\Http\Action\Api\UpdateTaskAction;
+use ToDoTest\Adapters\Http\Action\Api\DeleteTaskAction;
 
 class NoAuthApiRouter extends AbstractRouter
 {
@@ -47,9 +48,9 @@ class NoAuthApiRouter extends AbstractRouter
             return $this->get(CreateTaskAction::class)->execute($request, $response, $args);
         });
 
-//        $this->getApp()->delete('/tasks/{id}',  function(Request $request, Response $response, array $args): Response
-//        {
-//            //return $this->get(CreateTaskAction::class)->execute($request, $response, $args);
-//        });
+        $this->getApp()->delete('/tasks/{id}',  function(Request $request, Response $response, array $args): Response
+        {
+            return $this->get(DeleteTaskAction::class)->execute($request, $response, $args);
+        });
     }
 }

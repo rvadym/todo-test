@@ -7,11 +7,13 @@ use ToDoTest\Adapters\Http\Action\Api\CreateTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\GetPaginatedTasksAction;
 use ToDoTest\Adapters\Http\Action\Api\GetTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\ToggleTaskStatusAction;
+use ToDoTest\Adapters\Http\Action\Api\DeleteTaskAction;
 use ToDoTest\Adapters\Http\Action\Api\UpdateTaskAction;
 use ToDoTest\Application\UseCase\CreateTaskUseCase;
 use ToDoTest\Application\UseCase\GetPaginatedTasksUseCase;
 use ToDoTest\Application\UseCase\GetTaskUseCase;
 use ToDoTest\Application\UseCase\ToggleTaskStatusUseCase;
+use ToDoTest\Application\UseCase\DeleteTaskUseCase;
 use ToDoTest\Application\UseCase\UpdateTaskUseCase;
 
 class ActionsDependency extends AbstractDependency
@@ -57,6 +59,12 @@ class ActionsDependency extends AbstractDependency
         {
             return new ToggleTaskStatusAction(
                 $container->get(ToggleTaskStatusUseCase::class)
+            );
+        });
+        $this->bind(DeleteTaskAction::class, function (Container $container): DeleteTaskAction
+        {
+            return new DeleteTaskAction(
+                $container->get(DeleteTaskUseCase::class)
             );
         });
     }
